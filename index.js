@@ -1,0 +1,90 @@
+import bodyParser from "body-parser";
+import express from "express";
+import { USER } from "./users/index.js";
+import routes from "./routes.js";
+import {graphqlHTTP} from "express-graphql"
+import { NOTIFICATION } from "./notification/index.js";
+//const { default: axios } = require('axios');
+
+const INVENTORY_SERVICE_URL = "http://localhost:8080"
+
+
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+const PORT = process.env.PORT || 1000;
+
+app.use(routes.apiFlight.user.route, graphqlHTTP(USER))
+app.use(routes.apiFlight.notification.route, graphqlHTTP(NOTIFICATION))
+
+
+app.listen(PORT, () => console.log(`Now browse to localhost:${PORT}/[endpoint_name]`))
+
+/*
+app.get('/', (req, res) => {
+  res.send('Node.js API Gateway is up and running! Easy right???');
+});
+
+app.listen(PORT, () => {
+  console.log(`API Gateway is running on port ${PORT}`);
+});
+
+app.get('/user', async (req, res) => {
+    
+    try {
+        //console.log("Trying to get in", `${INVENTORY_SERVICE_URL}/user`)
+        const response = await axios.get(`${INVENTORY_SERVICE_URL}/user`);
+        res.json(response.data);
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error al consultar los usuarios' });
+    }
+});
+
+app.get('/user/:userId', async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const response = await axios.get(`${INVENTORY_SERVICE_URL}/user/${userId}`);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({mesagge: "Hubo un problema al encontrar el usuario"});
+    }
+});
+
+app.post('/user', async (req, res) => {
+    try {
+      const body  = req.body;
+      const response = await axios.post(`${INVENTORY_SERVICE_URL}/user`, body);
+      res.status(201).json(response.data);
+    } catch (error) {
+      res.status(500).json({mesagge: "Hubo un problema al crear el usuario"});
+    }
+});
+
+app.put('/user/:userId', async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const body  = req.body;
+      const response = await axios.put(`${INVENTORY_SERVICE_URL}/user/${userId}`, body);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({mesagge: "Hubo un problema al modificar el usuario"});
+    }
+});
+
+
+app.delete('/user/:userId', async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const response = await axios.delete(`${INVENTORY_SERVICE_URL}/user/${userId}`);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({mesagge: "Hubo un problema al eliminar el usuario"});
+    }
+});
+
+
+*/
