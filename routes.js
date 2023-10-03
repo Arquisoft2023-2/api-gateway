@@ -7,6 +7,14 @@ const routes = {
       notification: {
         url: "http://localhost:3000/notifications",
         route: "/apiNotification",
+      },
+      gps: {
+        url: "http://localhost:3001/ubicacion",
+        route: "/apiGPS",
+      },
+      msg: {
+        url: "http://localhost:8000/messages",
+        route: "/apiMsg",
       }
     }
   };

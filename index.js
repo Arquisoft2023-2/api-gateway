@@ -4,6 +4,8 @@ import { USER } from "./users/index.js";
 import routes from "./routes.js";
 import {graphqlHTTP} from "express-graphql"
 import { NOTIFICATION } from "./notification/index.js";
+import { FlIGHT } from "./gps/index.js";
+import { MSG } from "./msg/index.js";
 //const { default: axios } = require('axios');
 
 const INVENTORY_SERVICE_URL = "http://localhost:8080"
@@ -19,6 +21,10 @@ const PORT = process.env.PORT || 1000;
 
 app.use(routes.apiFlight.user.route, graphqlHTTP(USER))
 app.use(routes.apiFlight.notification.route, graphqlHTTP(NOTIFICATION))
+app.use(routes.apiFlight.gps.route, graphqlHTTP(FlIGHT))
+app.use(routes.apiFlight.msg.route, graphqlHTTP(MSG))
+
+
 
 
 app.listen(PORT, () => console.log(`Now browse to localhost:${PORT}/[endpoint_name]`))
