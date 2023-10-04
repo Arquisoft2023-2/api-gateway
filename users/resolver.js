@@ -20,7 +20,7 @@ export const root = {
                 })
     },
     createUser: (arg) => {
-        return axios.post(`${API_URL}`, {fk_plane: arg.fk_plate, age: arg.age, license: arg.license, name: arg.name})
+        return axios.post(`${API_URL}`, {fk_plane: arg.fk_plane, age: arg.age, license: arg.license, name: arg.name})
                 .then(response => {
                     return true
                 })
@@ -29,7 +29,7 @@ export const root = {
                 })
     },
     updateUser: (arg) => {
-        return axios.put(`${API_URL}/${arg.id}`, {fk_plane: arg.fk_plate, age: arg.age, license: arg.license, name: arg.name})
+        return axios.put(`${API_URL}/${arg.id}`, {fk_plane: arg.fk_plane, age: arg.age, license: arg.license, name: arg.name})
                 .then(response => {
                     return true
                 })
