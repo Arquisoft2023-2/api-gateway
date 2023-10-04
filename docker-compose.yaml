@@ -1,0 +1,19 @@
+version: '3'
+services:
+  notification:
+    image: jyarac/notification-ms
+    container_name: notification-microservice
+    ports:
+      - "3000:3000"
+
+  notifications_mq:
+    image: jyarac/mq_ms
+    container_name: notifications_mq
+    ports:
+      - "3001:3001"
+  rabbit:
+    image: rabbitmq:3.12-management
+    container_name: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672" 
