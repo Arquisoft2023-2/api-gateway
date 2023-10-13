@@ -8,16 +8,12 @@ import { FlIGHT } from "./gps/index.js";
 import { MSG } from "./msg/index.js";
 import { AUTH } from "./auth/index.js";
 //const { default: axios } = require('axios');
+import AuthMW from "./middlewares/AuthMW.js";
 
 const INVENTORY_SERVICE_URL = "http://localhost:8080"
 
 
 const app = express();
-
-app.use(routes.apiFlight.auth.route, graphqlHTTP(AUTH))
-app.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,7 +21,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
  
 const PORT = process.env.PORT || 1000;
 
+
+app.use(routes.apiFlight.auth.route, graphqlHTTP(AUTH))
 app.use(routes.apiFlight.user.route, graphqlHTTP(USER))
+
+app.use(AuthMW);
+
 app.use(routes.apiFlight.notification.route, graphqlHTTP(NOTIFICATION))
 app.use(routes.apiFlight.gps.route, graphqlHTTP(FlIGHT))
 app.use(routes.apiFlight.msg.route, graphqlHTTP(MSG))
