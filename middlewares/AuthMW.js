@@ -1,17 +1,20 @@
 import axios from 'axios';
+import routes from '../routes.js';
 
 const authMiddleware = async (req, res, next) => {
+    const BASE_URL = routes.apiFlight.auth.url
     try {
-        const token = req.headers.authorization.split(' ')[1]; // assuming the token is sent in the Authorization header as "Bearer <token>"
-        const response = await axios.post('http://auth-microservice/check-jwt', { token });
-        if (response.data.valid) {
+        const tkn = req.headers.tokenapi // assuming the token is sent in the Authorization header as "Bearer <token>"
+        //console.log("[RESPONSE]", BASE_URL+"/validate?tokenApi="+tkn)
+        const response = await axios.post(BASE_URL+"/validate?tokenApi="+tkn);
+        if (response.data) {
             next(); // token is valid, continue to the next middleware/controller
         } else {
             res.status(401).json({ message: 'Invalid token' }); // token is invalid, send 401 Unauthorized response
         }
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' }); // something went wrong, send 500 Internal Server Error response
+        //console.error(error);
+        res.status(500).json({ message: 'Permiso denegado, hace falta el atributo tokenapi en el header' }); // something went wrong, send 500 Internal Server Error response
     }
 };
 
