@@ -1,3 +1,4 @@
+
 const routes = {
     apiFlight: {
       user: {
@@ -15,8 +16,13 @@ const routes = {
       msg: {
         url: "http://message:8000/messages",
         route: "/apiMsg",
-      }
+      },
+      auth: {
+        url: "http://authms:80/api/Auth",
+        route: "/apiAuth",
+      },
     }
   };
   
   export default routes;
+
