@@ -1,4 +1,3 @@
-
 const routes = {
     apiFlight: {
       user: {
@@ -20,9 +19,8 @@ const routes = {
       auth: {
         url: "http://authms:80/api/Auth",
         route: "/apiAuth",
-      },
+      }
     }
   };
   
   export default routes;
-
