@@ -1,5 +1,6 @@
 import axios from 'axios';
 import routes from '../routes.js';
+//import addPlaneToUser from '../controllers/PlaneController.js';
 
 const authMiddleware = async (req, res, next) => {
     const BASE_URL = routes.apiFlight.auth.url
@@ -8,6 +9,7 @@ const authMiddleware = async (req, res, next) => {
         //console.log("[RESPONSE]", BASE_URL+"/validate?tokenApi="+tkn)
         const response = await axios.post(BASE_URL+"/validate?tokenApi="+tkn);
         if (response.data) {
+            //addPlaneToUser(response.data.id_user)
             next(); // token is valid, continue to the next middleware/controller
         } else {
             res.status(401).json({ message: 'Invalid token' }); // token is invalid, send 401 Unauthorized response
