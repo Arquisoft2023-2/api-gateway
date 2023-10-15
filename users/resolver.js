@@ -28,6 +28,15 @@ export const root = {
                     return false
                 })
     },
+    putUser: (arg) => {
+        return axios.put(`${API_URL}/${arg.id}`, {fk_plane: arg.fk_plane, age: arg.age, license: arg.license, name: arg.name})
+                .then(response => {
+                    return true
+                })
+                .catch((error) =>{
+                    return false
+                })
+    },
     updateUser: (arg) => {
         return axios.put(`${API_URL}/${arg.id}`, {fk_plane: arg.fk_plane, age: arg.age, license: arg.license, name: arg.name})
                 .then(response => {

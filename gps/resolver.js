@@ -19,6 +19,21 @@ export const root = {
                 return false
             })
     },
+    getAvailablePlane: (arg) => {
+        return axios.get(`${API_URL}/Plane/Available`)
+            .then(response => {
+                return response.data
+            })
+    },
+    putPlane:(arg) => {
+        return axios.put(`${API_URL}/Plane/${arg.Plate}`, {Plate: arg.Plate , Model: arg.Model , Availability: arg.Availability  ,Mechanic_state: arg.Mechanic_state})
+            .then(response => {
+                return true
+            })
+            .catch((error) =>{
+                return false
+            })
+    },
     getPlane: (arg) => {
         return axios.get(`${API_URL}/Plane`)
             .then(response => {
