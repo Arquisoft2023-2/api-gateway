@@ -1,14 +1,13 @@
 
-import routes from "../routes.js";
-import axios from "axios"
-import {putPlane, getAvailablePlane} from "../gps/resolver.js"
+import {root as rootUser} from "../users/resolver.js";
+import {root as rootGps} from "../gps/resolver.js";
 
-
-const baseURL = routes.apiFlight.gps.url
-export async function addPlaneToUser(idUser) {
-    availablePlane = getAvailablePlane();
-    //call putPlane and send available plane with false availability
-    const response = await putPlane(Plate = availablePlane.plate, Model = availablePlane.model,Availability = false,Mechanic_state = availablePlane.mechanic_state)
-    
+export async function addPlaneToUser(id){
+    try{
+    const responsePlane = rootGps.getAvailablePlane();
+    const responsePutPlane = rootGps.putPlane({Plate: responsePlane.Plate , Model: responsePlane.Model , Availability: false  ,Mechanic_state: responsePlane.Mechanic_state});
+    const responseUser = rootUser.updateUser({id: id, fk_plane: responsePlane.Plate});
+    } catch (e) {
+        console.log(e);
+    }
 }
-

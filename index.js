@@ -9,7 +9,7 @@ import { MSG } from "./msg/index.js";
 import { AUTH } from "./auth/index.js";
 //const { default: axios } = require('axios');
 import AuthMW from "./middlewares/AuthMW.js";
-
+import { addPlaneToUser } from "./utils/planeResolver.js";
 const INVENTORY_SERVICE_URL = "http://localhost:8080"
 
 
@@ -31,7 +31,16 @@ app.use(routes.apiFlight.notification.route, graphqlHTTP(NOTIFICATION))
 app.use(routes.apiFlight.gps.route, graphqlHTTP(FlIGHT))
 app.use(routes.apiFlight.msg.route, graphqlHTTP(MSG))
 
-
+//create an put route that used addPlanetoUser
+app.put("test/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const response = await addPlaneToUser(id);
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({mesagge: "Hubo un problema al modificar el usuario"});
+    }
+});
 
 
 

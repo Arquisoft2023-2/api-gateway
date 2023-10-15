@@ -2,20 +2,25 @@ version: '3'
 
 services:
   apig:
-    image: jyarac/api-gateway
+    image: jyarac/testapi
     container_name: apig-component
     ports:
       - "1000:1000" 
     depends_on:
       - notification
       - authms
-
+      - user
+      
   notification:
     image: jyarac/notification-ms
     container_name: notification-microservice
     ports:
       - "3000:3000"
-
+  user:
+    image: quhan/users
+    container_name: user-microservice
+    ports:
+      - "8080:8080"
   authms:
     image: jfc12/authms
     depends_on:
