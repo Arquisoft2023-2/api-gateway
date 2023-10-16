@@ -6,7 +6,7 @@ const schema = buildSchema(`
     type Query {
         getUsers: [User]
         getUser(id: Int): User
-        createUser(fk_plate: String, age: Int, license: String, name: String): Boolean
+        createUser(age: Int, license: String, name: String): Response
         assignPlane(id: Int, fk_plate : String): Boolean
         deleteUser(id: Int): Boolean 
 
@@ -18,6 +18,10 @@ const schema = buildSchema(`
         age: Int
         license: String
         name: String 
+    }
+    type Response {
+        id: Int
+        message: String
     }
 `)
 

@@ -5,10 +5,17 @@ import axios from "axios"
 
 export const root = {
     getNotifications: (arg) => {
-        return axios.get(`${API_URL}`)
+        if (arg.id) {
+            return axios.get(`${API_URL}/${arg.id}`)
             .then(response => {
                 return response.data
             })
+            } else{
+                return axios.get(`${API_URL}`)
+                .then(response => {
+                    return response.data
+                })
+            }
     },
     createNotification: (arg) => {
         return axios.post(`${API_URL}`, {plate: arg.plate, message: arg.message})

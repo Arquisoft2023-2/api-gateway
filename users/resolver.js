@@ -20,22 +20,22 @@ export const root = {
                 })
     },
     createUser: (arg) => {
-        return axios.post(`${API_URL}`, {fk_plate: arg.fk_plate, age: arg.age, license: arg.license, name: arg.name})
+        return axios.post(`${API_URL}`, {age: arg.age, license: arg.license, name: arg.name})
                 .then(response => {
-                    return true
+                    return response.data
                 })
                 .catch((error) =>{
-                    return false
+                    return error.response.data
                 })
     },
     assignPlane: (arg) => {
+        console.log(arg)
         return axios.put(`${API_URL}/${arg.id}`, {fk_plate: arg.fk_plate})
                 .then(response => {
-                    return true
+                    return {message: "Realizado con éxito la asignación de avión"}
                 })
                 .catch((error) =>{
-                    console.log(error)
-                    return false
+                    return {message: "Ocurrió un error", error: error}
                 })
     },
     deleteUser: (arg) => {
