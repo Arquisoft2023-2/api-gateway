@@ -8,7 +8,7 @@ export const API_URL = routes.apiFlight.user.url
 
 // Expose the schema and the resolver
 export const USER = {
-    schema: schema,
+    schema: schema, 
     rootValue: root,
     graphiql: true,
 }

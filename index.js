@@ -1,5 +1,7 @@
 import bodyParser from "body-parser";
 import express from "express";
+import cors from "cors";
+
 import { USER } from "./users/index.js";
 import routes from "./routes.js";
 import {graphqlHTTP} from "express-graphql"
@@ -15,6 +17,7 @@ const INVENTORY_SERVICE_URL = "http://localhost:8080"
 
 const app = express();
 
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

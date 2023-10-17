@@ -2,7 +2,7 @@ version: '3'
 
 services:
   apig:
-    image: quhan/api-gateway
+    image: quhan/api-gateway:latest
     container_name: apig-component
     ports:
       - "1000:1000" 
@@ -13,25 +13,25 @@ services:
       - authms
       - user
   message:
-    image: julianfernandezs/messagems
+    image: julianfernandezs/messagems:latest
     container_name: message-microservice
     ports:
       - "8000:8000"
 
   notification:
-    image: jyarac/notification-ms
+    image: jyarac/notification-ms:latest
     container_name: notification-microservice
     ports:
       - "3000:3000"
 
   gps:
-    image: jyarac/gps
+    image: jyarac/gps:latest
     container_name: gps-microservice
     ports:
       - "3001:3001"
 
   authms:
-    image: jfc12/authms
+    image: jfc12/authms:latest
     depends_on:
         - "authmsdbc"
     container_name: authms_c
@@ -52,7 +52,7 @@ services:
         SA_PASSWORD: "Password1!"
 
   user:
-    image: quhan/users
+    image: quhan/users:latest
     container_name: user-microservice
     ports:
       - "8080:8080"

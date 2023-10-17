@@ -8,12 +8,13 @@ export const root = {
 
     login: (arg) => {
         return axios.post(`${API_URL}/login`, {userId: arg.id, password: arg.password})
-            .then(response => {
-                addPlaneToUser(arg.id)
-                return response.data
+            .then((response) => {
+                console.log(response.data)
+                addPlaneToUser(response.data.Item2)
+                return response.data.Item1
             })
             .catch((error) =>{
-                return false
+                return null
             })
     },
     
